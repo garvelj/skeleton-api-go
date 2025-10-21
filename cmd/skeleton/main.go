@@ -7,5 +7,5 @@ import (
 func main() {
 	skeletonPort := ":13131"
 
-	api.New("").Start(skeletonPort)
+	api.New("conf.yaml").Start(skeletonPort)
 }

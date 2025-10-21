@@ -1,7 +1,13 @@
 package api
 
-func (a *Api) RoutesRegister() {
-	public := a.Router.Group("/v1")
+import (
+	"github.com/gin-gonic/gin"
+)
 
-	public.GET("/skeleton", a.Ping)
+func (a *Api) RoutesRegister() {
+	v1 := a.Router.Group("/v1")
+
+	v1.Use(gin.Recovery()) //  gin.Logger()
+
+	v1.GET("/skeleton", a.Ping)
 }

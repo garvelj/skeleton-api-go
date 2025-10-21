@@ -6,11 +6,20 @@ import (
 	"log"
 	"net/http"
 	"os/signal"
+	"skeleton/conf"
 	"syscall"
 	"time"
 
 	"github.com/gin-gonic/gin"
 )
+
+func (a *Api) initConfig(confpath string) {
+	a.Cfg, a.err = conf.LoadConfig(confpath)
+	if a.err != nil {
+		log.Fatalf("cannot load conf file; err: %s", a.err)
+		return
+	}
+}
 
 func (a *Api) initRouter() {
 	a.Router = gin.Default()
