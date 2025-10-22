@@ -9,8 +9,8 @@ import (
 )
 
 type Storage interface {
-	UserCount(params url.Values) (total int, err error)
-	UserRead(params url.Values) (users []model.User, total int, err error)
+	ClientCount(params url.Values) (total int, err error)
+	ClientRead(params url.Values) (users []model.Client, total int, err error)
 }
 
 func NewStorage(databaseType string, cfg conf.DbCfg) (Storage, error) {

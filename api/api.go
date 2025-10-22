@@ -1,9 +1,7 @@
 package api
 
 import (
-	"fmt"
 	"net/http"
-	"net/url"
 	"skeleton/conf"
 	"skeleton/storage"
 
@@ -29,27 +27,10 @@ type Api struct {
 }
 
 func (a *Api) Ping(c *gin.Context) {
+	c.JSON(http.StatusOK, "pong")
+}
 
-	db, err := storage.NewStorage("postgres", a.Cfg.Postgres)
-	if err != nil {
-		fmt.Println("err new storage: ", err)
-		c.JSON(http.StatusInternalServerError, err)
-		return
-	}
-
-	fmt.Println("DB: ", db)
-
-	parmas := url.Values{}
-	total, err := db.UserCount(parmas)
-	if err != nil {
-		fmt.Println("err new storage: ", err)
-		c.JSON(http.StatusInternalServerError, err)
-		return
-	}
-
-	fmt.Println("Total: ", total)
-
-	c.JSON(http.StatusOK, gin.H{
-		"ratle": "ratle",
-	})
+func PostgressConn(cfg conf.DbCfg) storage.Storage {
+	storage, _ := storage.NewStorage("postgres", cfg)
+	return storage
 }

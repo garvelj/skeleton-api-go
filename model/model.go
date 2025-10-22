@@ -2,7 +2,7 @@ package model
 
 import "time"
 
-type User struct {
+type Client struct {
 	Id         string    `db:"id" json:"id,omitempty" yaml:"id,omitempty"`
 	FirstName  string    `db:"first_name" json:"first_name,omitempty" yaml:"first_name,omitempty"`
 	LastName   string    `db:"last_name" json:"last_name,omitempty" yaml:"last_name,omitempty"`
