@@ -26,8 +26,13 @@ func (a *Api) ClientRead(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
+	a.Responder.RespondWithContext(c, http.StatusOK, map[string]any{
 		"total": total,
 		"items": clients,
-	})
+	}).Internal("jaga logovo i alertovo ")
+
+	// c.JSON(http.StatusOK, gin.H{
+	// 	"total": total,
+	// 	"items": clients,
+	// })
 }

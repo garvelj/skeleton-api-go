@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os/signal"
 	"skeleton/conf"
+	"skeleton/utils"
 	"syscall"
 	"time"
 
@@ -34,6 +35,14 @@ func (a *Api) initHttpServer() {
 		ReadTimeout:  5 * time.Second, // TODO: Load from config
 		WriteTimeout: 5 * time.Second, // TODO: Load from config
 	}
+}
+
+func (a *Api) initResponder() {
+	if a.err != nil {
+		log.Fatalf("cannot create Responder instance; err: %s", a.err)
+		return
+	}
+	a.Responder = utils.NewClient(true, true, log.Printf, utils.AlertSimulate, "json", utils.NewGinResponder())
 }
 
 // Start beggins Listen and Serve parting it into a new goroutine.
